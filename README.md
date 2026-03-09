@@ -13,7 +13,7 @@ A simple e-commerce product catalog built with plain PHP (no frameworks), MySQL,
 
 ## Tech Stack
 
-- **Backend:** PHP 8.x (OOP, no frameworks)
+- **Backend:** PHP 8.2+ (OOP, no frameworks)
 - **Database:** MySQL 8.0 (Docker)
 - **Frontend:** Bootstrap 5.3, vanilla JavaScript, Bootstrap Icons
 - **Dev tools:** PHPStan, PHP CS Fixer
@@ -39,7 +39,15 @@ cd product-catalog
 composer install
 ```
 
-### 3. Start the database
+### 3. Configure environment
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` if your database credentials differ from the defaults.
+
+### 4. Start the database
 
 ```bash
 docker compose up -d
@@ -48,7 +56,7 @@ docker compose up -d
 This starts a MySQL 8.0 container on port **3307** and automatically creates the `categories` database with tables and
 seed data (4 categories, 16 products).
 
-### 4. Start the dev server
+### 5. Start the dev server
 
 ```bash
 php -S localhost:8000

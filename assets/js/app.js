@@ -66,16 +66,17 @@ document.addEventListener('DOMContentLoaded', () => {
         buyModal.show();
     });
 
-    function fetchAndRender() {
+    function fetchAndRender(updateUrl = true) {
         const params = new URLSearchParams();
         if (currentCategoryId !== '') {
             params.set('category_id', currentCategoryId);
         }
         params.set('sort', currentSort);
 
-        // Update URL without reload
-        const newUrl = window.location.pathname + '?' + params.toString();
-        history.pushState(null, '', newUrl);
+        if (updateUrl) {
+            const newUrl = window.location.pathname + '?' + params.toString();
+            history.pushState(null, '', newUrl);
+        }
 
         fetch('api/products.php?' + params.toString())
             .then(res => res.json())
@@ -140,10 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
         currentSort = params.get('sort') || 'date_desc';
         sortSelect.value = currentSort;
         setActiveCategory(currentCategoryId);
-
-        fetch('api/products.php?' + params.toString())
-            .then(res => res.json())
-            .then(data => renderProducts(data.products))
-            .catch(err => console.error('Fetch error:', err));
+        fetchAndRender(false);
     });
 });

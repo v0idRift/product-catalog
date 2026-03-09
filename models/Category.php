@@ -25,9 +25,6 @@ class Category
         ';
 
         $stmt = $this->db->query($sql);
-        if ($stmt === false) {
-            return [];
-        }
 
         /** @var list<array{id: int, name: string, product_count: int}> */
         return $stmt->fetchAll();

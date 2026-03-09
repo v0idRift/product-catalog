@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 class Database
 {
-    private const string DSN = 'mysql:host=127.0.0.1;port=3307;dbname=categories;charset=utf8mb4';
-    private const string USER = 'root';
-    private const string PASSWORD = 'root';
     private static ?PDO $instance = null;
 
     private function __construct()
@@ -16,7 +13,18 @@ class Database
     public static function getInstance(): PDO
     {
         if (self::$instance === null) {
-            self::$instance = new PDO(self::DSN, self::USER, self::PASSWORD, [
+            $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+            $dotenv->load();
+            $dotenv->required(['DB_HOST', 'DB_PORT', 'DB_NAME', 'DB_USER', 'DB_PASSWORD']);
+
+            $dsn = sprintf(
+                'mysql:host=%s;port=%s;dbname=%s;charset=utf8mb4',
+                $_ENV['DB_HOST'],
+                $_ENV['DB_PORT'],
+                $_ENV['DB_NAME'],
+            );
+
+            self::$instance = new PDO($dsn, $_ENV['DB_USER'], $_ENV['DB_PASSWORD'], [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_EMULATE_PREPARES => false,

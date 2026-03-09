@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/config/Database.php';
 require_once __DIR__ . '/models/Category.php';
 require_once __DIR__ . '/models/Product.php';
@@ -28,7 +29,7 @@ $initialData = json_encode([
                 'category_id' => $categoryId,
                 'sort' => $sort,
         ],
-], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+], JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_THROW_ON_ERROR);
 
 ?>
 <!DOCTYPE html>

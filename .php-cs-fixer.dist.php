@@ -10,7 +10,6 @@ $finder = PhpCsFixer\Finder::create()
     ])
     ->append([
         __DIR__ . '/index.php',
-        __DIR__ . '/setup.php',
     ]);
 
 return (new PhpCsFixer\Config())
