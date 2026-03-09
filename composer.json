@@ -1,0 +1,12 @@
+{
+"name": "zak/product-catalog",
+  "type": "project",
+  "require": {
+    "php": ">=8.3",
+    "ext-pdo": "*"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^2.1",
+    "friendsofphp/php-cs-fixer": "^3.94"
+  }
+}
